@@ -33,17 +33,41 @@
             border: 3px solid transparent;
             width: 206px;
             height: 206px;
+            user-select: none;
+            -webkit-user-drag: none;
+            margin: 4px;
         }
+
+        /* Elemento em foco */
         .foco{
             backdrop-filter: brightness(0.8);
             border: 3px solid gray;
         }
+
+        /* Animação de erro */
+        .erro{
+            animation: animacaoErro 0.5s forwards;
+        }
+        @keyframes animacaoErro{
+            0%{
+            }
+            25%{
+                translate: 5px;
+            }
+            50%{
+                translate: -5px;
+            }
+            75%{
+                translate: 5px;
+            }
+            100%{
+                translate: 0px;
+            }
+        }
     </style>
 <body>
     <h1>Clique no número de dados que você quer misturar</h1>
-    <!-- <button>Dados</button> -->
     <div id="difficult">
-
         <br>
         <button onclick="beginGame(1)">1</button>
         <button onclick="beginGame(2)">2</button>
