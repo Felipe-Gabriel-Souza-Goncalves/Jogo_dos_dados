@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shuffler</title>
+</head>
+
+    <style>
+        body{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        #area{
+            display: inherit;
+            flex-wrap: wrap;
+            width: 700px;
+            align-items: inherit;
+            justify-content: inherit;
+            margin-left: auto;
+            margin-right: auto;
+        }
+            #escolhasImg{
+                display: inherit;
+                flex-wrap: wrap;
+                width: 700px;
+                align-items: inherit;
+                justify-content: inherit;
+            }
+        .escolha{
+            border: 3px solid transparent;
+            width: 206px;
+            height: 206px;
+            user-select: none;
+            -webkit-user-drag: none;
+            margin: 4px;
+        }
+
+        /* Elemento em foco */
+        .foco{
+            backdrop-filter: brightness(0.8);
+            border: 3px solid gray;
+        }
+
+        /* Animação de erro */
+        .erro{
+            animation: animacaoErro 0.5s forwards;
+        }
+        @keyframes animacaoErro{
+            0%{
+            }
+            25%{
+                translate: 5px;
+            }
+            50%{
+                translate: -5px;
+            }
+            75%{
+                translate: 5px;
+            }
+            100%{
+                translate: 0px;
+            }
+        }
+    </style>
+<body>
+    <h1>Clique no número de dados que você quer misturar</h1>
+    <div id="difficult">
+        <br>
+        <button onclick="beginGame(1)">1</button>
+        <button onclick="beginGame(2)">2</button>
+        <button onclick="beginGame(3)">3</button>
+        <button onclick="beginGame(4)">4</button>
+        <button onclick="beginGame(5)">5</button>
+        <button onclick="beginGame(6)">6</button>
+        <br><br><br>
+    </div>
+    <div id="area">
+        <span>Modos de combinar: <span id="modosDeCombinar"></span></span><br>
+        <div id="escolhasImg">
+
+        </div>
+    </div>
+    <br>
+
+    <div id="stats">
+        
+    </div>
+
+    
+    <script src="script/script.js"></script>
+</body>
+</html>
