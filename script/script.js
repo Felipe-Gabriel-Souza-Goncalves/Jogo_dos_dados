@@ -9,10 +9,7 @@ function beginGame(num){
     while (document.querySelector("img") != null) {
         document.querySelector("img").remove()
     }
-    if(document.getElementById('input') != null){
-        document.getElementById('input').remove()
-        document.getElementById('button').remove()
-    }
+
     document.getElementById("modosDeCombinar").innerHTML = 6**num + " maneiras"
 
     for (let index = 0; index < num; index++) {
@@ -20,23 +17,16 @@ function beginGame(num){
         randomNums[index] = e
 
         const img = document.createElement("img")
-        img.style.width = "200px"
         img.src = "img/cartaInterrogacao.png"
         img.classList.add(`escolha`)
+        img.tabIndex = "0"
         img.setAttribute(`id`, `escolha${index+1}`)
         img.setAttribute("onclick", `addFocus(${index+1})`)
+        img.setAttribute("onfocus", `addFocus(${index+1})`)
         document.getElementById("escolhasImg").appendChild(img)
     }
-    var input = document.createElement("input")
-    input.placeholder = 'Digite seu palpite'
-    input.setAttribute('id', 'input')
-    var button = document.createElement("button")
-    button.innerHTML = "Enviar"
-    button.setAttribute("id", "button")
-    button.setAttribute("onclick", "sendGuess(itemEmFoco)")
 
-    document.getElementById("area").appendChild(input)
-    document.getElementById("area").appendChild(button)
+    document.querySelector("#area").style.display = "flex"
 
     addFocus(1)
 }
@@ -54,9 +44,13 @@ function sendGuess(nthElement){
     // Caso de acerto
     if(input.value == randomNums[nthElement-1]){
         alert("YEEEEEEEEY")
-        img.src = `img/dado-face${input.value}.png`
         img.setAttribute("onclick", ``)
         img.classList.remove("foco")
+        img.classList.add("acertou")
+        const number = input.value
+        setTimeout(() => {img.src = `img/dado-face${number}.png`
+            setTimeout(()=>{img.classList.remove("acertou")}, 500)
+        }, 500)
 
         focoProximo()
     // Caso de erro
@@ -70,6 +64,7 @@ function sendGuess(nthElement){
     }
     // Limpa o input para uso 
     input.value = ""
+    input.focus()
 }
 
 // Foca o primeiro elemento disponível
@@ -105,3 +100,14 @@ function errorAnimation(){
         document.getElementById("button").classList.remove("erro")
     }, 1000)
 }
+
+document.querySelector("#formPalpite").addEventListener("submit", (e) => {
+    e.preventDefault();
+    sendGuess(itemEmFoco);
+})
+
+document.addEventListener("keydown", function(e) {
+  if (e.ctrlKey && e.key === "ArrowDown") {
+    document.querySelector("#input").focus();
+  }
+});
